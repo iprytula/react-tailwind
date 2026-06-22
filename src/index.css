@@ -5,12 +5,48 @@
     animation-fill-mode: both;
   }
 
-  .slide-in-form-top {
+  .slide-in-from-top {
     animation-name: slideInFromTop;
   }
 
-  .duration-300 {
+  .slide-in-from-bottom {
+    animation-name: slideInFromBottom;
+  }
+
+  .animation-duration-200 {
+    animation-duration: 200ms;
+  }
+
+  .animation-duration-300 {
     animation-duration: 300ms;
+  }
+
+  .animation-duration-700 {
+    animation-duration: 700ms;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
