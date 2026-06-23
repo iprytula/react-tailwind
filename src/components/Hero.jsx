@@ -1,5 +1,5 @@
 import { ArrowRight, ChevronDown, Play, Sparkles } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { codeExamples, floatingCards } from "../data/code-examples";
 import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -7,20 +7,23 @@ import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeTab, setActiveTab] = useState("App.jsx");
+  const innerRef = useRef(null);
 
   useEffect(() => {
+    const currentElement = innerRef.current;
+
     function handleMouseMove(e) {
       setMousePosition({ x: e.clientX, y: e.clientY });
     }
 
-    window.addEventListener("mousemove", handleMouseMove);
+    currentElement.addEventListener("mousemove", handleMouseMove);
 
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => currentElement.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const currentFloatingCard = floatingCards[activeTab];
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section ref={innerRef} className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div
         className="absolute inset-0 opacity-30"
         style={{
